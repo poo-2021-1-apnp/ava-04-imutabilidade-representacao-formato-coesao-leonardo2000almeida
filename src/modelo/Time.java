@@ -4,6 +4,8 @@ public class Time {
   private final int hora;
   private final int minutos;
   private final int segundos;
+  public final Time MIDDAY = new Time(12, 0, 0);
+  public final Time MIDNIGHT = new Time(0, 0, 0);
 
   Time(int hora, int minutos, int segundos) {
     this.hora = hora;
@@ -59,6 +61,17 @@ public class Time {
     return new Time(this.hora, this.minutos, this.segundos - seconds);
   }
 
+  public String toShoString() {
+    if (hora == 0)
+      return (this.minutos + "m" + this.segundos + "s");
+    else if (this.minutos == 0)
+      return (hora + "h" + this.segundos + "s");
+    else if (this.segundos == 0)
+      return (hora + "h" + this.minutos + "m");
+    else
+      return (this.hora + "h" + this.minutos + "m" + this.segundos + "s");
+  }
+
   public Time shift() {
     if (this.hora < 12)
       return new Time(13, this.minutos, this.segundos);
@@ -80,6 +93,53 @@ public class Time {
     return false;
   }
 
+  public String toLongString() {
+    if (hora == 0)
+      return (this.minutos + "minutos e " + this.segundos + " segundos");
+    else if (this.minutos == 0)
+      return (this.hora + " horas e " + this.segundos + " segundos");
+    else if (segundos == 0)
+      return (this.hora + " horas e " + this.minutos + " minutos");
+    else
+      return (this.hora + " horas " + this.minutos + " minutos e " + this.segundos + " segundos");
+  }
+
+  public Time fromSeconds(int segundos) {
+    int horas = segundos / 3600;
+    int minutos = (segundos / 60) - horas * 60;
+    int segundo = segundos % 60;
+    return new Time(horas, minutos, segundo);
+  }
+
+  public Time fromDouble(double segundos) {
+    String tempo = "" + segundos + "";
+    tempo = tempo.replace(".", "");
+    int segundo = Integer.parseInt(tempo);
+    int horas = segundo / 3600;
+    int minutos = (segundo / 60) - horas * 60;
+    int seconds = segundo % 60;
+    return new Time(horas, minutos, seconds);
+  }
+
+  public Time fromString(String tempo) {
+    String time[] = tempo.split(":");
+    int hora = Integer.parseInt(time[0]);
+    int minuto = Integer.parseInt(time[1]);
+    int segundo = Integer.parseInt(time[2]);
+    return new Time(hora, minuto, segundo);
+  }
+
+  public Double toDouble() {
+    double hora = this.hora;
+    double minuto = this.minutos;
+    double segundo = this.segundos;
+    return (hora + minuto + segundo);
+  }
+
+  // public int toInt() {
+    
+  // }
+
   @Override
   public String toString() {
     return (this.hora + ":" + this.minutos + ":" + this.segundos);
@@ -87,14 +147,19 @@ public class Time {
 
   @Override
   public boolean equals(Object obj) {
-    if(this == obj)return true;
-    if(null == obj) return false;
+    if (this == obj)
+      return true;
+    if (null == obj)
+      return false;
 
-    if(obj  instanceof Time) {
+    if (obj instanceof Time) {
       Time tempo = (Time) obj;
-      if(this.hora == tempo.hora)return true;
-      if(this.minutos == tempo.minutos)return true;
-      if(this.segundos == tempo.segundos)return true;
+      if (this.hora == tempo.hora)
+        return true;
+      if (this.minutos == tempo.minutos)
+        return true;
+      if (this.segundos == tempo.segundos)
+        return true;
     }
 
     return false;
