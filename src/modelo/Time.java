@@ -20,45 +20,64 @@ public class Time {
   }
 
   Time(int hora) {
-    this.hora = hora;
-    this.minutos = 0;
-    this.segundos = 0;
+    this(hora, 0, 0);
   }
 
   public Time plus(Time tempo) {
     return new Time(tempo.hora, tempo.minutos, tempo.segundos);
   }
 
-  public Time plusHours(Time tempo) {
-    return new Time(tempo.hora, this.minutos, this.segundos);
+  public Time plusHours(int hours) {
+    return new Time(hours, this.minutos, this.segundos);
   }
 
-  public Time plusMinutes(Time tempo) {
-    return new Time(this.hora, tempo.minutos, this.segundos);
+  public Time plusMinutes(int minutes) {
+    return new Time(this.hora, minutes, this.segundos);
   }
 
-  public Time plusSeconds(Time tempo) {
-    return new Time(this.hora, this.minutos, tempo.segundos);
+  public Time plusSeconds(int seconds) {
+    return new Time(this.hora, this.minutos, seconds);
   }
 
   public Time tick() {
-    return new Time(this.hora, this.segundos, this.segundos - 1);
+    if (this.segundos - 1 >= 0)
+      return new Time(this.hora, this.minutos, this.segundos - 1);
+
+    throw new IllegalStateException("Impossível diminuir mais !");
   }
 
   public Time minus(Time tempo) {
-    return new Time(this.hora - tempo.hora, this.minutos - tempo.segundos, this.segundos - tempo.segundos);
+    if (this.hora - tempo.hora >= 0 && this.minutos - tempo.minutos >= 0 && this.segundos - tempo.minutos >= 0)
+      return new Time(this.hora - tempo.hora, this.minutos - tempo.segundos, this.segundos - tempo.segundos);
+
+    throw new IllegalStateException("Impossível executar essa função!");
+
   }
 
   public Time minusHours(int hours) {
-    return new Time(this.hora - hours, this.minutos, this.segundos);
+    if (this.hora - hours >= 0)
+      return new Time(this.hora - hours, this.minutos, this.segundos);
+
+    throw new IllegalStateException(
+        "Impossível executar essa função!: " + hours + " - " + this.hora + " precisa ser igual ou maior que zero");
+
   }
 
   public Time minusMinutes(int minutes) {
-    return new Time(this.hora, this.minutos - minutes, this.segundos);
+    if (this.hora - minutes >= 0)
+      return new Time(this.hora, this.minutos - minutes, this.segundos);
+
+    throw new IllegalStateException(
+        "Impossível executar essa função!: " + minutes + " - " + this.hora + " precisa ser igual ou maior que zero");
   }
 
   public Time minusSeconds(int seconds) {
-    return new Time(this.hora, this.minutos, this.segundos - seconds);
+    if (this.hora - seconds >= 0)
+      return new Time(this.hora, this.minutos, this.segundos - seconds);
+
+    throw new IllegalStateException(
+        "Impossível executar essa função!: " + seconds + " - " + this.hora + " precisa ser igual ou maior que zero");
+
   }
 
   public String toShoString() {
@@ -82,13 +101,13 @@ public class Time {
   }
 
   public boolean midDay() {
-    if (this.hora == 12)
+    if (this.hora == 12 && this.minutos == 0 && this.segundos == 0)
       return true;
     return false;
   }
 
   public boolean midNight() {
-    if (this.hora == 0)
+    if (this.hora == 0 && this.minutos == 0 && this.segundos == 0)
       return true;
     return false;
   }
@@ -130,15 +149,20 @@ public class Time {
   }
 
   public Double toDouble() {
-    double hora = this.hora;
+    double hora = this.hora * 60;
     double minuto = this.minutos;
-    double segundo = this.segundos;
-    return (hora + minuto + segundo);
+    double segundo = this.segundos / 60;
+    return (hora + minuto + segundo) / 60;
   }
 
-  // public int toInt() {
-    
-  // }
+  public int toInt() {
+    int hora = (this.hora * 60) * 60;
+    int minutos = (this.minutos * 60) / 60;
+    int segundos = (this.segundos * 60) / 60;
+    return hora + minutos + segundos;
+  }
+
+
 
   @Override
   public String toString() {
@@ -154,11 +178,7 @@ public class Time {
 
     if (obj instanceof Time) {
       Time tempo = (Time) obj;
-      if (this.hora == tempo.hora)
-        return true;
-      if (this.minutos == tempo.minutos)
-        return true;
-      if (this.segundos == tempo.segundos)
+      if (this.hora == tempo.hora && this.minutos == tempo.minutos && this.segundos == tempo.segundos)
         return true;
     }
 
