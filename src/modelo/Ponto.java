@@ -40,18 +40,18 @@ public class Ponto {
     return true;
   }
 
-  @Override
-  // public String toString() {
-  //   if (entrou) {
-  //     String times[] = entrada.split(":");
-  //     if(times.length == 3)
-  //     return times[0] + "h" + times[1] + "m" + times[2] + "s";
-  //     if (times.length == 3)
-  //     return times[0] + "h" + times[1] + "m" + times[2] + "s";
-  //   } else {
-  //     String times[] = entrada.split(":");
-  //     String times2[] = saida.split(":");
-  //     return times[0] + "h" + times[1] + "m" + times[2] + "s"+" e saiu às ";
-  //   }
-  // }
-}
+//   @Override
+//   // public String toString() {
+//   //   if (entrou) {
+//   //     String times[] = entrada.split(":");
+//   //     if(times.length == 3)
+//   //     return times[0] + "h" + times[1] + "m" + times[2] + "s";
+//   //     if (times.length == 3)
+//   //     return times[0] + "h" + times[1] + "m" + times[2] + "s";
+//   //   } else {
+//   //     String times[] = entrada.split(":");
+//   //     String times2[] = saida.split(":");
+//   //     return times[0] + "h" + times[1] + "m" + times[2] + "s"+" e saiu às ";
+//   //   }
+//   // }
+// }
