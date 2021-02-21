@@ -7,19 +7,19 @@ public class Time {
   public final Time MIDDAY = new Time(12, 0, 0);
   public final Time MIDNIGHT = new Time(0, 0, 0);
 
-  Time(int hora, int minutos, int segundos) {
+  public Time(int hora, int minutos, int segundos) {
     this.hora = hora;
     this.minutos = minutos;
     this.segundos = segundos;
   }
 
-  Time(int hora, int minutos) {
+  public Time(int hora, int minutos) {
     this.hora = hora;
     this.minutos = minutos;
     this.segundos = 0;
   }
 
-  Time(int hora) {
+  public Time(int hora) {
     this(hora, 0, 0);
   }
 

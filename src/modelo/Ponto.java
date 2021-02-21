@@ -10,7 +10,7 @@ public class Ponto {
   int count = 0;
   public String ponto = getPonto();
 
-  Ponto(String nome) {
+  public Ponto(String nome) {
     this.nome = nome;
   }
 

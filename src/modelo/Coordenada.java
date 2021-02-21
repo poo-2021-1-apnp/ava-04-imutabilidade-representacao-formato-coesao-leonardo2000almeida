@@ -4,7 +4,7 @@ public class Coordenada {
   public final Double latitude;
   public final Double longitude;
 
-  Coordenada(double latitude, double longitude) {
+  public Coordenada(double latitude, double longitude) {
     if (latitude < -90.0 || latitude > 90.0)
       throw new IllegalArgumentException("Latitude precisa ser maior que -90 e menor que 90 graus");
     if (longitude < -180.0 || longitude > 180)

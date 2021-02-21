@@ -6,7 +6,7 @@ public class TimeSpan {
   public final int minutos;
   public final int segundos;
 
-  TimeSpan(int dias, int horas, int minutos, int segundos) {
+  public TimeSpan(int dias, int horas, int minutos, int segundos) {
     if (dias < 0 || horas < 0 || minutos < 0 || segundos < 0)
       throw new IllegalArgumentException("dias, horas, minutos e segundos precisam ser maiores ou iguais a 0");
 
@@ -16,7 +16,7 @@ public class TimeSpan {
     this.segundos = segundos;
   }
 
-  TimeSpan(int horas, int minutos, int segundos) {
+  public TimeSpan(int horas, int minutos, int segundos) {
     if (horas < 0 || minutos < 0 || segundos < 0)
       throw new IllegalArgumentException("dias, horas, minutos e segundos precisam ser maiores ou iguais a 0");
 
