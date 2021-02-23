@@ -23,6 +23,18 @@ public class Time {
     this(hora, 0, 0);
   }
 
+  public int getHours() {
+    return this.hora;
+  }
+
+  public int getMinutes() {
+    return this.minutos;
+  }
+
+  public int getSeconds() {
+    return this.segundos;
+  }
+
   public Time plus(Time tempo) {
     return new Time(tempo.hora, tempo.minutos, tempo.segundos);
   }
